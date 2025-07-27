@@ -74,7 +74,7 @@ brew uninstall --zap storcat
 ### Common Issues
 
 #### "App can't be opened because it is from an unidentified developer"
-This is normal for unsigned apps. To resolve:
+**For Intel Macs**: This is normal for unsigned apps. To resolve:
 
 1. **Right-click** on StorCat.app in Applications
 2. **Select "Open"** from the context menu
@@ -82,6 +82,8 @@ This is normal for unsigned apps. To resolve:
 4. **StorCat will launch** and be remembered for future use
 
 Alternatively, you can approve it in **System Preferences > Security & Privacy > General**.
+
+**For Apple Silicon Macs**: The tap automatically removes quarantine attributes during installation, so StorCat should launch without security warnings.
 
 #### Installation Issues
 ```bash
@@ -109,7 +111,7 @@ sudo chown -R $(whoami) $(brew --prefix)/*
 
 This tap automatically detects your Mac's architecture:
 - **Intel Macs** (x64): Downloads Intel-optimized build
-- **Apple Silicon** (M1/M2/M3): Downloads ARM64-optimized build
+- **Apple Silicon** (M1/M2/M3): Downloads ARM64-optimized build with automatic quarantine removal
 
 ## 🔄 Version Management
 
