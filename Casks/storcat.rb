@@ -20,6 +20,12 @@ cask "storcat" do
   
   app "StorCat.app"
   
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/StorCat.app"],
+                   sudo: false
+  end
+  
   zap trash: [
     "~/Library/Application Support/StorCat",
     "~/Library/Preferences/com.kenscott.storcat.plist",
