@@ -138,9 +138,33 @@ brew cask audit --strict Casks/storcat.rb
 brew install --cask ./Casks/storcat.rb
 ```
 
-### Updating the formula:
+### 🚀 Automated Updates
+
+Use the included update script to automatically update the tap when new StorCat releases are published:
+
+```bash
+# Run the update script
+./update-tap.sh
+```
+
+**What the script does:**
+1. **Fetches the latest release** from GitHub API
+2. **Downloads both DMG files** (Intel + Apple Silicon)
+3. **Calculates SHA256 hashes** automatically
+4. **Updates the cask formula** with new version and hashes
+5. **Validates the cask** (if brew is installed)
+6. **Commits changes** with detailed commit message
+7. **Optionally pushes** to GitHub
+
+### Manual Updates
+
+If you prefer to update manually:
 1. Update version number in `Casks/storcat.rb`
-2. Update SHA256 hashes for new release files
+2. Update SHA256 hashes for new release files:
+   ```bash
+   shasum -a 256 StorCat-VERSION-arm64.dmg
+   shasum -a 256 StorCat-VERSION.dmg
+   ```
 3. Test installation
 4. Commit and push changes
 
