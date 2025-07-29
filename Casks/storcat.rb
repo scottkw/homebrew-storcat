@@ -1,11 +1,13 @@
 cask "storcat" do
-  version "1.1.2"
+  version "1.2.0"
   
   if Hardware::CPU.arm?
-    sha256 "aeaf923e6028b36fcad00462d872727f1528b7041abb910ca59dd939295289d3"
+    sha256 "📥 Downloading: https://github.com/scottkw/storcat/releases/download/1.2.0/StorCat-1.2.0-arm64.dmg
+6f9fda6a3420f93d1dfa6a276a4aed2ddb9ebb08fe823dfa76d172a5d84dde80"
     url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}-arm64.dmg"
   else
-    sha256 "7d01ec5f562901a9cc4824db7ce5284a8a034a1ed8af4659cac50fa2ede2d1c5"
+    sha256 "📥 Downloading: https://github.com/scottkw/storcat/releases/download/1.2.0/StorCat-1.2.0.dmg
+7e3bb6962a3e45007f6ef6c76b7d232f2bd41ec3559eb4d9993ecd335e2c826d"
     url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}.dmg"
   end
   
@@ -19,12 +21,6 @@ cask "storcat" do
   end
   
   app "StorCat.app"
-  
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/StorCat.app"],
-                   sudo: false
-  end
   
   zap trash: [
     "~/Library/Application Support/StorCat",
