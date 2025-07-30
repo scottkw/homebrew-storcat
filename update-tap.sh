@@ -22,7 +22,7 @@ get_sha256() {
     local url="$1"
     local temp_file=$(mktemp)
     
-    echo "📥 Downloading: $url"
+    echo "📥 Downloading: $url" >&2
     curl -L "$url" -o "$temp_file" 2>/dev/null
     local sha256=$(shasum -a 256 "$temp_file" | cut -d' ' -f1)
     rm -f "$temp_file"
