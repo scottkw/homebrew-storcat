@@ -2,10 +2,10 @@ cask "storcat" do
   version "1.2.2"
 
   if Hardware::CPU.arm?
-    sha256 "0f21e51b9d1b3bed79396fd893526cb2d537e36df386c6f3b649cb0fa0f46976"
+    sha256 "ca1fe1067f4e9843746ff5d03a3e6c35fb0247b863c0a9f57907d3cd9e80cf17"
     url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}-arm64.dmg"
   else
-    sha256 "8e98bd502463390710632c28b13544bff3ce612749cbf30515f193855fd5a144"
+    sha256 "51b54b1a5780fe38eea20c6911b2071931bfb09c98716805f88fefede1a0fa56"
     url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}.dmg"
   end
 
