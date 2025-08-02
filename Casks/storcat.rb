@@ -1,13 +1,8 @@
 cask "storcat" do
-  version "1.2.2"
+  version "1.2.3"
+  sha256 "812bcf43ac85cdbe591baa297f0e36855320fb04304b36261cc48da53aa51908"
 
-  if Hardware::CPU.arm?
-    sha256 "ca1fe1067f4e9843746ff5d03a3e6c35fb0247b863c0a9f57907d3cd9e80cf17"
-    url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}-arm64.dmg"
-  else
-    sha256 "51b54b1a5780fe38eea20c6911b2071931bfb09c98716805f88fefede1a0fa56"
-    url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}.dmg"
-  end
+  url "https://github.com/scottkw/storcat/releases/download/#{version}/StorCat-#{version}-universal.dmg"
 
   name "StorCat"
   desc "Directory Catalog Manager - Create, search, and browse directory catalogs"

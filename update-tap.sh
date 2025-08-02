@@ -54,24 +54,21 @@ if version_exists "$VERSION"; then
     exit 0
 fi
 
-# Build download URLs based on your naming convention
-ARM64_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/${VERSION}/StorCat-${VERSION}-arm64.dmg"
-INTEL_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/${VERSION}/StorCat-${VERSION}.dmg"
+# Build download URL for universal binary
+UNIVERSAL_URL="https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/${VERSION}/StorCat-${VERSION}-universal.dmg"
 
 echo ""
-echo "🔐 Calculating SHA256 hashes..."
+echo "🔐 Calculating SHA256 hash..."
 
-# Get SHA256 hashes for both architectures
-ARM64_SHA256=$(get_sha256 "$ARM64_URL")
-INTEL_SHA256=$(get_sha256 "$INTEL_URL")
+# Get SHA256 hash for universal binary
+UNIVERSAL_SHA256=$(get_sha256 "$UNIVERSAL_URL")
 
-if [ -z "$ARM64_SHA256" ] || [ -z "$INTEL_SHA256" ]; then
-    echo "❌ Error: Failed to calculate SHA256 hashes"
+if [ -z "$UNIVERSAL_SHA256" ]; then
+    echo "❌ Error: Failed to calculate SHA256 hash"
     exit 1
 fi
 
-echo "✅ ARM64 SHA256: $ARM64_SHA256"
-echo "✅ Intel SHA256: $INTEL_SHA256"
+echo "✅ Universal SHA256: $UNIVERSAL_SHA256"
 
 # Backup current cask file
 cp "$CASK_FILE" "${CASK_FILE}.backup"
@@ -83,14 +80,9 @@ echo "✏️  Updating cask formula..."
 cat > "$CASK_FILE" << EOF
 cask "storcat" do
   version "$VERSION"
-  
-  if Hardware::CPU.arm?
-    sha256 "$ARM64_SHA256"
-    url "https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/#{version}/StorCat-#{version}-arm64.dmg"
-  else
-    sha256 "$INTEL_SHA256"
-    url "https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/#{version}/StorCat-#{version}.dmg"
-  end
+  sha256 "$UNIVERSAL_SHA256"
+
+  url "https://github.com/${REPO_OWNER}/${REPO_NAME}/releases/download/#{version}/StorCat-#{version}-universal.dmg"
   
   name "StorCat"
   desc "Directory Catalog Manager - Create, search, and browse directory catalogs"
@@ -140,9 +132,8 @@ git add "$CASK_FILE"
 git commit -m "Update StorCat to version $VERSION
 
 - Updated to StorCat v$VERSION
-- Updated SHA256 hashes for both architectures
-- ARM64: $ARM64_SHA256
-- Intel: $INTEL_SHA256"
+- Now uses universal binary (Intel x64 + Apple Silicon ARM64)
+- SHA256: $UNIVERSAL_SHA256"
 
 echo "✅ Changes committed successfully!"
 
