@@ -1,6 +1,6 @@
 cask "storcat" do
-  version "2.2.0"
-  sha256 "204256a7986b40cb3b3e56348001db3d59b43f88ec1f2ca0a52cfcf922757e48"
+  version "2.2.1"
+  sha256 "cedcadf7cc1f20a221127fa94c0578d96dad274e37a5a4998634adc3c223c290"
 
   url "https://github.com/scottkw/storcat/releases/download/v#{version}/StorCat-v#{version}-darwin-universal.dmg"
 
