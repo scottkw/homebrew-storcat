@@ -1,6 +1,6 @@
 cask "storcat" do
-  version "2.2.1"
-  sha256 "cedcadf7cc1f20a221127fa94c0578d96dad274e37a5a4998634adc3c223c290"
+  version "2.3.0"
+  sha256 "10cc32782fe9d84bf80b22ddfd8cdb958a8e9930eb520288142f34d62b65e605"
 
   url "https://github.com/scottkw/storcat/releases/download/v#{version}/StorCat-v#{version}-darwin-universal.dmg"
 
@@ -14,6 +14,7 @@ cask "storcat" do
   end
 
   app "StorCat.app"
+  binary "#{appdir}/StorCat.app/Contents/MacOS/StorCat", target: "storcat"
 
   zap trash: [
     "~/Library/Application Support/StorCat",
